@@ -40,6 +40,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
 app.use('/users', users);
+
 // map requests at /articles to use the routes/articles.js file
 app.use('/articles', articles);
 
