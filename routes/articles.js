@@ -3,6 +3,7 @@ var router = express.Router();
 
 // add mongoose
 var mongoose = require('mongoose');
+
 // make this page to refer to the database
 var Article = require('../models/article');
 
@@ -21,10 +22,24 @@ router.get('/', function(req, res, next) {
 
         }
     })
-    res.render('articles', {
-        title: 'Articles'
-    });
 });
 
+// GET handler for add to display a blank form
+router.get('/add', function(req, res, next) {
+    res.render('articles/add', {
+        title: 'Add a New Article'
+    });
+});
+// POST handler for add to process the form
+router.post('/add', function(req, res, next) {
+    // save a new article using our Article model
+    Article.create( {
+        title: req.body.title,
+        content: req.body.content
+        }
+    );
+    // redirect to main articles page
+    res.redirect('/articles');
+});
 // make public
 module.exports = router;
